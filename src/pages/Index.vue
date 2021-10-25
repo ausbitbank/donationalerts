@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
-    <div v-if="hideUI === 'true' && showAlert === true" class="text-center text-white text-h6" style="">
-      <q-btn label="Start checking for transfers" @click="getTransfers(); this.showAlert = false;" v-if="timerStarted === false" color="primary" />
+    <div v-if="hideUI === 'true'" class="text-center text-white text-h6" style="">
+      <div v-if="showAlert === true">
       <transition appear :enter-active-class="anim1" :leave-active-class="anim2">
         <div class="text-effect q-ma-sm q-pa-sm"><div class="neon" :data-text="alert.title">{{ alert.title }}</div><div class="gradient"></div><div class="spotlight"></div></div>
       </transition>
@@ -18,8 +18,9 @@
         <i>"{{ alert.memo }}"</i>
       </div>
       </transition>
+      </div>
     </div>
-    <div v-else-if="hideUI === 'false'">
+    <div v-else-if="hideUI !== 'true'">
       <q-input label="Hive username" v-model="username" />
       <q-input label="Alert image" v-model="image" />
       <q-img :src="image" />
@@ -59,6 +60,7 @@ import { useRouter, useRoute } from 'vue-router'
 export default defineComponent({
   name: 'PageIndex',
   async mounted () {
+    if (this.hideUI === true) { console.log('ui hidden') }
     while (true && this.timerStarted && this.username !== '') {
       await this.transferCheck()
       console.log('Check count: ' + this.checkCount)
@@ -86,8 +88,8 @@ export default defineComponent({
       showAlert: ref(false),
       timerStarted: ref(true),
       checkCount: ref(1),
-      alertDelay: ref(15000), // 10 seconds before alert dissapears
-      checkDelay: ref(30000), // 30 seconds between account checks
+      alertDelay: ref(15000), // 15 seconds before alert dissapears
+      checkDelay: ref(60000), // 60 seconds between account checks
       alreadyPlayedAlerts: ref([]), // id's of already played alerts
       alert: {
         title: 'Donation!',
