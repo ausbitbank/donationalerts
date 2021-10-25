@@ -164,7 +164,7 @@ export default defineComponent({
       },
       copyClipboard (what) {
         copyToClipboard(what)
-          .then(() => { $q.notify("Copied to clipboard"); this.textToSpeech('Copied') })
+          .then(() => { $q.notify("Copied to clipboard") })
       },
       newDonation(username, amount, memo) {
         this.showAlert = true
