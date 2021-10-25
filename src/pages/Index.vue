@@ -10,7 +10,7 @@
       </transition>
       <transition appear :enter-active-class="anim1" :leave-active-class="anim2">
       <div class="text-title bg-black q-ma-sm q-pa-sm" style="font-size: 50px">
-        {{ alert.user }} sent {{ alert.amount }} <q-avatar size="md" class="q-ma-xs"><img src="https://hive.ausbit.dev/statics/hive.svg" /></q-avatar>
+        {{ alert.user }} sent {{ alert.amount.split(' ')[0] }} <q-avatar size="md" class="q-ma-xs"><img src="https://hive.ausbit.dev/statics/hive.svg" /></q-avatar>
       </div>
       </transition>
       <transition appear :enter-active-class="anim1" :leave-active-class="anim2">
