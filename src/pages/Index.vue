@@ -3,7 +3,7 @@
     <div v-if="hideUI === 'true'" class="text-center text-white text-h6" style="">
       <div v-if="showAlert === true">
       <transition appear :enter-active-class="anim1" :leave-active-class="anim2">
-        <div class="text-effect q-ma-sm q-pa-sm"><div class="neon" :data-text="alert.title">{{ alert.title }}</div><div class="gradient"></div><div class="spotlight"></div></div>
+        <div class="text-effect q-ma-sm q-pa-sm text-center"><div class="neon" :data-text="alert.title">{{ alert.title }}</div><div class="gradient"></div><div class="spotlight"></div></div>
       </transition>
       <transition appear :enter-active-class="anim1" :leave-active-class="anim2">
         <img :src="image" />
@@ -118,7 +118,7 @@ export default defineComponent({
               var amount = parseInt(op.amount.split(' ')[0])
               if (!this.alreadyPlayedAlerts.includes(id)) { // We haven't seen this alert already
                 if (id > this.transferHistory.latest[0]) { // If ID is greater then the last known transfer
-                  if (op.to === this.username) {// And is an incoming transfer
+                  if (op.to === this.username && !ignoreAccounts.split(',').includes(op.from)) {// And is an incoming transfer, not from an ignored account
                     if (amount >= this.minAlert) { // Amount is above minimum for alert
                       console.log(op)
                       this.playSound()
