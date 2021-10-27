@@ -86,7 +86,8 @@ export default defineComponent({
       hideUI: route.query.hideUI || ref(false),
       animation1: route.query.animation1 || ref('fadeIn'),
       animation2: route.query.animation2 || ref('fadeOut'),
-      showAlert: ref(false),
+      showAlert: route.query.showAlert || ref(false),
+      showOutgoing: route.query.showOutgoing || ref(false),
       timerStarted: ref(true),
       checkCount: ref(1),
       alertDelay: ref(15000), // 15 seconds before alert dissapears
@@ -120,7 +121,7 @@ export default defineComponent({
               var token = parseInt(op.amount.split(' ')[1])
               if (!this.alreadyPlayedAlerts.includes(id)) { // We haven't seen this alert already
                 if (id > this.transferHistory.latest[0]) { // If ID is greater then the last known transfer
-                  if (op.to === this.username && !this.ignoreAccounts.split(',').includes(op.from)) {// And is an incoming transfer, not from an ignored account
+                  if ((this.showOutgoing || op.to === this.username) && !this.ignoreAccounts.split(',').includes(op.from)) { // And is an incoming transfer, not from an ignored account
                     if (amount >= this.minAlert) { // Amount is above minimum for alert
                       console.log(op)
                       this.playSound()
