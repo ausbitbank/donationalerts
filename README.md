@@ -10,7 +10,6 @@ Customise your settings, generate a link to import into your OBS scene as a brow
 Known issues:
     - Multiple transfers in a short timeframe will all play at once (needs a queuing system)
     - Accounts with no recent transfers in history will bug out (send a dust tranfer to fix this)
-    - HBD is not currently recognised
 
 Future features that would be nice to have (pull requests welcome):
     - Support youtube video alerts, with audio
